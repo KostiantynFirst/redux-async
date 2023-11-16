@@ -1,6 +1,5 @@
 import { Button } from 'components/Button/Button';
 import { useDispatch } from 'react-redux';
-import { addTask } from 'redux/tasksSlice';
 import { Form, Input } from './TaskForm.styled';
 
 export const TaskForm = () => {
@@ -9,7 +8,7 @@ export const TaskForm = () => {
     const handleSubmit = e => {
       e.preventDefault();
       const form = e.target;
-      dispatch(addTask(form.elements.text.value));
+      // dispatch(addTask(form.elements.text.value));
       form.reset();
     };
   
