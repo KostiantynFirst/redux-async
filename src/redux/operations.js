@@ -10,12 +10,12 @@ axios.defaults.baseURL = 'https://655663ce84b36e3a431fb080.mockapi.io';
 
 export const fetchTasks = createAsyncThunk(
     'tasks/fetchAll',
-    async () => {
+    async (_, thunkAPI) => {
       try {
         const res = await axios.get('/tasks');
         return res.data;
       } catch (error) {
-        console.log(error);
+        return thunkAPI.rejectWithValue(error.message);
       }
     }
   );
