@@ -4,14 +4,14 @@ import { AppBar } from "./AppBar/AppBar";
 import { useDispatch } from "react-redux";
 import { TaskForm } from "./TaskForm/TaskForm";
 import { useEffect } from "react";
-import { fetchContacts } from "redux/operations";
+import { fetchTasks } from "redux/operations";
 
 export const App = () => {
 
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 useEffect(() => {
-  dispatch(fetchContacts)
+  dispatch(fetchTasks());
 }, [dispatch]);
 
   return (
