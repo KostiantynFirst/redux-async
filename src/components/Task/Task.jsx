@@ -1,21 +1,21 @@
 import { MdClose } from 'react-icons/md';
 import { TaskContainer } from './Task.styled';
 import { useDispatch } from 'react-redux';
-import { deleteTask } from 'redux/operations';
+import { deleteTask, toggleCompleted } from 'redux/operations';
 
 export const Task = ({ task }) => {
       
     const dispatch = useDispatch();
 
     const handleDelete = () => dispatch(deleteTask(task.id));
-    // const handleToggle = () => dispatch(toggleCompleted(task.id))
+    const handleToggle = () => dispatch(toggleCompleted(task));
 
     return (
       <TaskContainer>
         <input
           type="checkbox"
           checked={task.completed}
-          // onChange={handleToggle}
+          onChange={handleToggle}
         />
         <p>{task.text}</p>
         <button onClick={handleDelete}>

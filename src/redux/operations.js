@@ -44,6 +44,34 @@ export const fetchTasks = createAsyncThunk(
     }
   )
 
+  export const toggleCompleted = createAsyncThunk(
+    'tasks/toggleCompleted',
+    async (task, thunkAPI) => {
+      try {
+        const res = await axios.put(`/tasks/${task.id}`, {
+          completed: !task.completed
+        });
+        return res.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  )
+
+  // export const editTask = createAsyncThunk(
+  //   'tasks/editTask',
+  //   async ({id, newText}, thunkAPI) => {
+  //     try {
+  //       const res = await axios.put(`/tasks/${id}`, {
+  //         text: newText
+  //       });
+  //       return res.data;
+  //     } catch (error) {
+  //       return thunkAPI.rejectWithValue(error.message);
+  //     }
+  //   }
+  // )
+
 //pending -> 'contacts/fetchAll/pending';
 //fulfield -> 'contacts/fetchAll/fulfield';
 //rejected -> 'contacts/fetchAll/rejected';
