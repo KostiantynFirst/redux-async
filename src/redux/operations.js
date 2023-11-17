@@ -20,6 +20,18 @@ export const fetchTasks = createAsyncThunk(
     }
   );
 
+  export const addTask = createAsyncThunk(
+    'tasks/addTask',
+    async (text, thunkAPI) => {
+      try {
+        const res = await axios.post('/tasks', { text });
+        return res.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  )
+
 //pending -> 'contacts/fetchAll/pending';
 //fulfield -> 'contacts/fetchAll/fulfield';
 //rejected -> 'contacts/fetchAll/rejected';
