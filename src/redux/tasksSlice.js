@@ -17,8 +17,6 @@ const handleRejected = (state, action) => {
         isLoading: false,
         error: null,
     },
-    reducers: {
-    },
     extraReducers: {
         [fetchTasks.pending]: handlePending,
         [fetchTasks.fulfilled](state, action) {
