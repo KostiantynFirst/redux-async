@@ -38,7 +38,9 @@ const handleRejected = (state, action) => {
         [deleteTask.fulfilled](state, action) {
             state.isLoading = false;
             state.error = null;
-            return state.items.filter(item => item.id !== action.payload.id )
+            const idx = state.items.findIndex(item => item.id === action.payload.idx);
+            state.items.splice(idx, 1);
+            // return state.items.filter(item => item.id !== action.payload.id )
         },
         [deleteTask.rejected]: handleRejected,
     }
