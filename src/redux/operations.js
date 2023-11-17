@@ -32,6 +32,18 @@ export const fetchTasks = createAsyncThunk(
     }
   )
 
+  export const deleteTask = createAsyncThunk(
+    'tasks/deleteTask',
+    async (taskId, thunkAPI) => {
+      try {
+        const res = await axios.delete(`/tasks/${taskId}`);
+        return res.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  )
+
 //pending -> 'contacts/fetchAll/pending';
 //fulfield -> 'contacts/fetchAll/fulfield';
 //rejected -> 'contacts/fetchAll/rejected';

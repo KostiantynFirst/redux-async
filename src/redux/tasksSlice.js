@@ -1,5 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchTasks, addTask } from "./operations";
+import { fetchTasks, addTask, deleteTask } from "./operations";
+
+const handlePending = state => {
+    state.isLoading = true;
+}
+
+const handleRejected = (state, action) => {
+    state.isLoading = false;
+    state.error = action.payload;
+}
 
   const taskSlice = createSlice({
     name: 'tasks',
@@ -11,30 +20,27 @@ import { fetchTasks, addTask } from "./operations";
     reducers: {
     },
     extraReducers: {
-        [fetchTasks.pending](state) {
-            state.isLoading = true;
-        },
+        [fetchTasks.pending]: handlePending,
         [fetchTasks.fulfilled](state, action) {
             state.isLoading = false;
             state.error = null;
             state.items = action.payload;
         },
-        [fetchTasks.rejected](state, action) {
-            state.isLoading = false;
-            state.error = action.payload;
-        },
-        [addTask.pending](state) {
-            state.isLoading = true;
-        },
+        [fetchTasks.rejected]: handleRejected,
+        [addTask.pending]: handlePending,
         [addTask.fulfilled](state, action) {
             state.isLoading = false;
             state.error = null;
             state.items.push(action.payload);
         },
-        [addTask.rejected](state, action) {
+        [addTask.rejected]: handleRejected,
+        [deleteTask.pending]: handlePending,
+        [deleteTask.fulfilled](state, action) {
             state.isLoading = false;
-            state.error = action.payload;
+            state.error = null;
+            return state.items.filter(item => item.id !== action.payload.id )
         },
+        [deleteTask.rejected]: handleRejected,
     }
   });
 
