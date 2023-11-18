@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import { CounterContainer, CounterContainerParagraph } from "./TaskCounter.styled"
-import { useTaskCount } from "redux/hooks/useTaskCount"
+import { selectTaskCount } from "redux/selectors";
 
 export const TaskCounter = () => {
 
-    const {active, completed } = useTaskCount();
+    const {active, completed } = useSelector(selectTaskCount);
 
     return (
         <CounterContainer>
