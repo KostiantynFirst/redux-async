@@ -7,6 +7,7 @@ export const selectError = state => state.tasks.error;
 export const selectStatusFilter = state => state.filters.status;
 
 export const selectTaskCount = createSelector([selectTasks], (tasks) => {
+ 
     return tasks.reduce(
         (count, task) => {
             if(task.completed) {
@@ -20,11 +21,8 @@ export const selectTaskCount = createSelector([selectTasks], (tasks) => {
         );
 });
 
-export const selectVisibleTasks = state => {
-
-    const tasks = selectTasks(state);
-    const filter = selectStatusFilter(state);
-
+export const selectVisibleTasks = createSelector([selectTasks, selectStatusFilter], (tasks, filter) => {
+    
     switch (filter) {
         case statusFilters.active:
             return tasks.filter(task => !task.completed);
@@ -33,4 +31,4 @@ export const selectVisibleTasks = state => {
         default:
             return tasks;
     }
-};
+});
